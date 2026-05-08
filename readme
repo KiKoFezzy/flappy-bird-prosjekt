@@ -1,0 +1,460 @@
+## Plan: enkelt “Flappy Bird”-spill i C# med raylib-cs
+Martin Dustan — 12:29 PM
+Hei, her er gpt writeup-en for flappy-bird i c# med raylib.
+Husk at dette mest sannsynelig vil ta litt tid, så ta det etterhvert.
+Bruk bare tid på dette hvis du vil og har kontrol på nåverende modul-oppgaver 🙂
+
+Målet er å lage et lite 2D-spill i vanlig C#, uten Unity eller stor spillmotor.
+
+Bruk raylib-cs til:
+
+* vindu
+* tegning
+* tastetrykk
+* enkel lyd
+* spill-løkke
+
+Start med former, ikke bilder:
+
+* fugl = sirkel
+* rør = rektangler
+
+---
+
+## 1. Sett opp prosjektet
+
+Lag et vanlig C# console-prosjekt med .NET.
+
+Installer raylib-cs via NuGet.
+
+Første mål:
+
+> Få opp et vindu med bakgrunnsfarge.
+
+Ikke gå videre før dette virker.
+
+---
+
+## 2. Tegn fuglen
+
+Lag variabler:
+
+```csharp
+float birdX;
+float birdY;
+float birdRadius;
+```
+
+Tegn fuglen som en sirkel.
+
+Fuglen trenger bare å bevege seg opp og ned. Rørene kan bevege seg mot fuglen.
+
+Mål:
+
+> Fuglen vises på skjermen.
+
+---
+
+## 3. Legg til fall og hopp
+
+Lag variabler:
+
+```csharp
+float birdVelocity;
+float gravity;
+float jumpStrength;
+```
+
+Bruk `Raylib.GetFrameTime()` for jevn bevegelse.
+
+Logikk:
+
+```text
+hvis Space trykkes:
+    gi fuglen fart oppover
+
+øke fart med gravity
+flytte fuglen basert på fart
+```
+
+Mål:
+
+> Fuglen faller, og Space får den til å hoppe.
+
+---
+
+## 4. Lag rør
+
+Lag en enkel struktur:
+
+```csharp
+struct Pipe
+{
+    public float X;
+    public float GapY;
+    public bool Scored;
+}
+```
+
+Forklaring:
+
+* `X`: hvor røret er horisontalt
+* `GapY`: midten av åpningen
+* `Scored`: om røret allerede har gitt poeng
+
+... (245 lines left)
+
+flappy-bird-raylib.txt
+5 KB
+Victor — 12:30 PM
+tusen takk 🙂
+﻿
+Martin Dustan
+mkdustan
+👋
+## Plan: enkelt “Flappy Bird”-spill i C# med raylib-cs
+
+Målet er å lage et lite 2D-spill i vanlig C#, uten Unity eller stor spillmotor.
+
+Bruk raylib-cs til:
+
+* vindu
+* tegning
+* tastetrykk
+* enkel lyd
+* spill-løkke
+
+Start med former, ikke bilder:
+
+* fugl = sirkel
+* rør = rektangler
+
+---
+
+## 1. Sett opp prosjektet
+
+Lag et vanlig C# console-prosjekt med .NET.
+
+Installer raylib-cs via NuGet.
+
+Første mål:
+
+> Få opp et vindu med bakgrunnsfarge.
+
+Ikke gå videre før dette virker.
+
+---
+
+## 2. Tegn fuglen
+
+Lag variabler:
+
+```csharp
+float birdX;
+float birdY;
+float birdRadius;
+```
+
+Tegn fuglen som en sirkel.
+
+Fuglen trenger bare å bevege seg opp og ned. Rørene kan bevege seg mot fuglen.
+
+Mål:
+
+> Fuglen vises på skjermen.
+
+---
+
+## 3. Legg til fall og hopp
+
+Lag variabler:
+
+```csharp
+float birdVelocity;
+float gravity;
+float jumpStrength;
+```
+
+Bruk `Raylib.GetFrameTime()` for jevn bevegelse.
+
+Logikk:
+
+```text
+hvis Space trykkes:
+    gi fuglen fart oppover
+
+øke fart med gravity
+flytte fuglen basert på fart
+```
+
+Mål:
+
+> Fuglen faller, og Space får den til å hoppe.
+
+---
+
+## 4. Lag rør
+
+Lag en enkel struktur:
+
+```csharp
+struct Pipe
+{
+    public float X;
+    public float GapY;
+    public bool Scored;
+}
+```
+
+Forklaring:
+
+* `X`: hvor røret er horisontalt
+* `GapY`: midten av åpningen
+* `Scored`: om røret allerede har gitt poeng
+
+Bruk faste verdier:
+
+```csharp
+float pipeWidth;
+float gapHeight;
+float pipeSpeed;
+```
+
+Mål:
+
+> Ett rørpar vises på skjermen.
+
+---
+
+## 5. Flytt rørene
+
+Rørene skal bevege seg mot venstre:
+
+```text
+for hvert rør:
+    pipe.X -= pipeSpeed * dt
+```
+
+Når et rør går ut av skjermen, flytt det tilbake til høyre side.
+
+Mål:
+
+> Rørene beveger seg mot fuglen.
+
+---
+
+## 6. Bruk flere rør
+
+Bruk en liste:
+
+```csharp
+List<Pipe> pipes = new List<Pipe>();
+```
+
+Start med 2–3 rør med god avstand.
+
+Eksempel:
+
+```text
+rør 1: x = 900
+rør 2: x = 1200
+rør 3: x = 1500
+```
+
+Gi hvert rør en tilfeldig `GapY`, men ikke for høyt eller lavt.
+
+Mål:
+
+> Flere rør kommer jevnt mot fuglen.
+
+---
+
+## 7. Sjekk kollisjon
+
+Bruk rektangler for enkel kollisjon:
+
+```csharp
+Rectangle birdRect;
+Rectangle topPipeRect;
+Rectangle bottomPipeRect;
+```
+
+Bruk raylib:
+
+```csharp
+Raylib.CheckCollisionRecs(rect1, rect2)
+```
+
+Sjekk kollisjon med:
+
+* øvre rør
+* nedre rør
+* bunnen av skjermen
+* toppen av skjermen, hvis ønskelig
+
+Mål:
+
+> Spillet oppdager krasj.
+
+---
+
+## 8. Lag game over
+
+Bruk:
+
+```csharp
+bool gameOver;
+```
+
+Ved kollisjon:
+
+```csharp
+gameOver = true;
+```
+
+Når `gameOver` er `true`:
+
+* stopp bevegelse
+* vis “Game Over”
+* la spilleren trykke R for restart
+
+Mål:
+
+> Spilleren kan tape og starte på nytt.
+
+---
+
+## 9. Legg til poeng
+
+Gi poeng når fuglen passerer et rør:
+
+```text
+hvis pipe.X + pipeWidth < birdX og pipe.Scored == false:
+    score++
+    pipe.Scored = true
+```
+
+Mål:
+
+> Spilleren får poeng for å passere rør.
+
+---
+
+## 10. Rydd opp i metoder
+
+Når spillet virker, del koden i metoder:
+
+```csharp
+static void UpdateBird(float dt)
+static void UpdatePipes(float dt)
+static void DrawBird()
+static void DrawPipes()
+static void CheckCollisions()
+static void ResetGame()
+```
+
+Start enkelt. Rydd etterpå.
+
+---
+
+## Anbefalt filstruktur
+
+Start med:
+
+```text
+FlappySimple/
+  Program.cs
+```
+
+Hvis prosjektet vokser:
+
+```text
+FlappySimple/
+  Program.cs
+  Pipe.cs
+```
+
+Ikke lag mange filer tidlig.
+
+---
+
+## Rekkefølge
+
+1. Lag vindu
+2. Tegn fugl
+3. Få fuglen til å falle
+4. Få Space til å virke
+5. Tegn ett rørpar
+6. Flytt røret
+7. Lag flere rør
+8. Sjekk kollisjon
+9. Legg til game over
+10. Legg til restart
+11. Legg til poeng
+12. Rydd opp
+13. Legg eventuelt til lyd eller grafikk
+
+---
+
+## Unngå i første versjon
+
+* Unity
+* menyer
+* high score-lagring
+* animasjoner
+* avanserte klasser
+* inheritance
+* interfaces
+* physics engine
+* spritesheets
+* mobilversjon
+* online score
+* lyd før spillet fungerer
+
+---
+
+## Ferdig minimumsversjon
+
+Prosjektet er ferdig nok når:
+
+* vinduet åpnes
+* fuglen vises
+* fuglen faller
+* Space får fuglen til å hoppe
+* rør beveger seg fra høyre til venstre
+* kollisjon gir game over
+* passerte rør gir poeng
+* spilleren kan starte på nytt
+
+---
+
+## Ekstra etterpå
+
+Bare etter at grunnspillet fungerer:
+
+* lyd ved hopp
+* lyd ved krasj
+* bilde i stedet for sirkel
+* startskjerm
+* økende hastighet
+* enkel high score i minnet
+* bevegelig bakke
+* bedre farger
+
+---
+
+## Hovedregel
+
+Lag én liten ting om gangen.
+
+Eksempel:
+
+```text
+Først: få fuglen til å falle og hoppe.
+Så: få ett rør til å bevege seg.
+Så: sjekk om fuglen treffer røret.
+```
+
+Små steg gjør prosjektet mulig å fullføre.
+flappy-bird-raylib.txt
+5 KB
