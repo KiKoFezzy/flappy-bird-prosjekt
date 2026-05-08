@@ -7,14 +7,14 @@ internal static class Program
     [System.STAThread]
     public static void Main()
     {
-        Raylib.InitWindow(800, 480, "Hello World");
+        Raylib.InitWindow(800, 480, "Flappy Bird");
 
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.White);
+            Raylib.ClearBackground(Color.Blue);
 
-            Raylib.DrawText("Hello, world!", 12, 12, 20, Color.Black);
+            //Raylib.DrawText("Hello, world!", 12, 12, 20, Color.Black);
 
             Raylib.EndDrawing();
         }
