@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "du3m+8dFwcs=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Deltager\\kh\\raylib-cs\\flappy-bird prosjekt\\flappy-bird prosjekt.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Deltager\\.nuget\\packages\\raylib-cs\\7.0.2\\raylib-cs.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
