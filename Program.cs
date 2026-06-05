@@ -14,7 +14,10 @@ internal static class Program
 
             Raylib.ClearBackground(Color.Blue);
             //Raylib.DrawText("Hello, player ONE!", 12, 12, 20, Color.Black);
-            Raylib.DrawCircle((float birdX, 10); {float birdY; decrement}; {float birdRadius; 5} Color.Yellow);
+            void Bird {
+             void DrawCircle(int centerX, int centerY, float radius, Color color);   
+            }
+            //Raylib.DrawCircle((float birdX, 10); {float birdY; decrement}; {float birdRadius; 5}; Color.Yellow);
 
             Raylib.EndDrawing();
         }
