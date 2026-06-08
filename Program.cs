@@ -17,12 +17,33 @@ internal static class Program
 
             // Bird "egenskaper"
             float birdVelocity = -3;
-            float jumpStrength = +1;
-            float gravity = +2;
+            //float jumpStrength = +1;
+            //float gravity = +2;
             
 
             while (!Raylib.WindowShouldClose())
-            {
+            
+    {
+        // --- Game Logic ---
+        // 1. Check for jump input
+        if (Raylib.IsKeyPressed(KeyboardKey.Space))
+        {
+            birdVelocity = -8; // Set negative velocity to move the bird UP
+        }
+
+        // 2. Apply physics
+            birdVelocity += 0.5f; // Gravity pulls the bird down over time
+            birdY += birdVelocity; // Move the bird
+
+        // --- Drawing ---
+        Raylib.BeginDrawing();
+        Raylib.ClearBackground(Color.Blue);
+
+        Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
+
+        Raylib.EndDrawing();
+}
+            /*{
                 // --- Game Logic ---
                 // Example decrement: you can adjust birdY here for gravity
                 birdY += 2; 
@@ -38,7 +59,7 @@ internal static class Program
                 Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
 
                 Raylib.EndDrawing();
-            }
+            } */
 
             Raylib.CloseWindow();
         }
