@@ -26,6 +26,9 @@ internal static class Program
                 // --- Game Logic ---
                 // Example decrement: you can adjust birdY here for gravity
                 birdY += 2; 
+                jumpStrength += 1;
+                birdVelocity += 3;
+                gravity += 2;
 
                 // --- Drawing ---
                 Raylib.BeginDrawing();
