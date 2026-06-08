@@ -7,21 +7,29 @@ internal static class Program
     public static void Main()
     {
         Raylib.InitWindow(800, 480, "Flappy Bird");
+        Raylib.SetTargetFPS(60);
 
-        while (!Raylib.WindowShouldClose())
-        {
-            Raylib.BeginDrawing();
+            // Bird variables
+            float birdX = 200;
+            float birdY = 240;
+            float birdRadius = 15;
 
-            Raylib.ClearBackground(Color.Blue);
-            //Raylib.DrawText("Hello, player ONE!", 12, 12, 20, Color.Black);
-            void Bird {
-             void DrawCircle(int centerX, int centerY, float radius, Color color);   
+            while (!Raylib.WindowShouldClose())
+            {
+                // --- Game Logic ---
+                // Example decrement: you can adjust birdY here for gravity
+                birdY += 2; 
+
+                // --- Drawing ---
+                Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.Blue);
+
+                // 2. Fixed DrawCircle syntax (integers for coordinates, valid Color call)
+                Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
+
+                Raylib.EndDrawing();
             }
-            //Raylib.DrawCircle((float birdX, 10); {float birdY; decrement}; {float birdRadius; 5}; Color.Yellow);
 
-            Raylib.EndDrawing();
+            Raylib.CloseWindow();
         }
-
-        Raylib.CloseWindow();
     }
-}
