@@ -8,11 +8,17 @@ internal static class Program
     {
         Raylib.InitWindow(800, 480, "Flappy Bird");
         Raylib.SetTargetFPS(60);
+        Raylib.GetFrameTime();
 
             // Bird variables
             float birdX = 200;
             float birdY = 240;
             float birdRadius = 15;
+
+            // Bird "egenskaper"
+            float birdVelocity; 20;
+            float gravity; 99;
+            float jumpStrength; 10;
 
             while (!Raylib.WindowShouldClose())
             {
