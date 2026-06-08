@@ -16,9 +16,10 @@ internal static class Program
             float birdRadius = 15;
 
             // Bird "egenskaper"
-            float birdVelocity; 20;
-            float gravity; 99;
-            float jumpStrength; 10;
+            float birdVelocity = -3;
+            float jumpStrength = +1;
+            float gravity = +2;
+            
 
             while (!Raylib.WindowShouldClose())
             {
