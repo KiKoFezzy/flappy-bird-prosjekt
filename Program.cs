@@ -14,12 +14,9 @@ internal static class Program
             float birdX = 200;
             float birdY = 240;
             float birdRadius = 15;
-
-            // Bird "egenskaper"
             float birdVelocity = -3;
             //float jumpStrength = +1;
             //float gravity = +2;
-            
 
             while (!Raylib.WindowShouldClose())
             
@@ -42,7 +39,15 @@ internal static class Program
         Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
 
         Raylib.EndDrawing();
+        Raylib.CloseWindow();
+    }
+    
 }
+}
+
+
+
+
             /*{
                 // --- Game Logic ---
                 // Example decrement: you can adjust birdY here for gravity
@@ -61,6 +66,6 @@ internal static class Program
                 Raylib.EndDrawing();
             } */
 
-            Raylib.CloseWindow();
-        }
-    }
+    
+        
+    
