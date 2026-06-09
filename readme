@@ -1,3 +1,4 @@
+/*
 ## Plan: enkelt “Flappy Bird”-spill i C# med raylib-cs
 Martin Dustan — 12:29 PM
 Hei, her er gpt writeup-en for flappy-bird i c# med raylib.
@@ -350,25 +351,27 @@ Så: sjekk om fuglen treffer røret.
 Små steg gjør prosjektet mulig å fullføre.
 flappy-bird-raylib.txt
 5 KB
-
-## Ekstra 
-      /*{
+*/
+//## Ekstra 
+      //{
                 // --- Game Logic ---
                 // Example decrement: you can adjust birdY here for gravity
-                birdY += 2; 
-                jumpStrength += 1;
-                birdVelocity += 3;
-                gravity += 2;
+ //               birdY += 2; 
+   //             jumpStrength += 1;
+     //           birdVelocity += 3;
+       //         gravity += 2;
 
                 // --- Drawing ---
-                Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.Blue);
+         //       Raylib.BeginDrawing();
+       //         Raylib.ClearBackground(Color.Blue);
 
                 // 2. Fixed DrawCircle syntax (integers for coordinates, valid Color call)
-                Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
+     //           Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
 
-                Raylib.EndDrawing();
-            } */
+       //         Raylib.EndDrawing();
+     //       } 
+            
+/*
 using Raylib_cs;
 using System.Collections.Generic;
 using System;
@@ -487,4 +490,4 @@ foreach (Pipe pipe in pipes)
     }
     
 }
-}
+} */
