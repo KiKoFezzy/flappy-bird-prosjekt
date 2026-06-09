@@ -74,11 +74,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Deltager\\kh\\raylib-cs\\flappy-bird prosjekt\\flappy-bird prosjekt.csproj",
+      "projectUniqueName": "C:\\kodehode\\flappyBird\\flappyBird\\flappy-bird prosjekt\\flappy-bird prosjekt.csproj",
       "projectName": "flappy-bird prosjekt",
-      "projectPath": "C:\\Users\\Deltager\\kh\\raylib-cs\\flappy-bird prosjekt\\flappy-bird prosjekt.csproj",
+      "projectPath": "C:\\kodehode\\flappyBird\\flappyBird\\flappy-bird prosjekt\\flappy-bird prosjekt.csproj",
       "packagesPath": "C:\\Users\\Deltager\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Deltager\\kh\\raylib-cs\\flappy-bird prosjekt\\obj\\",
+      "outputPath": "C:\\kodehode\\flappyBird\\flappyBird\\flappy-bird prosjekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Deltager\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,71 +1,128 @@
 ﻿using Raylib_cs;
+using System.Collections.Generic;
+using System;
 
-namespace flappy_bird_prosject;
-internal static class Program
+namespace flappy_bird_project
 {
-    [System.STAThread] // STAThread is required if you deploy using NativeAOT on Windows - See https://github.com/raylib-cs/raylib-cs/issues/301
-    public static void Main()
+    public struct Pipe
     {
-        Raylib.InitWindow(800, 480, "Flappy Bird");
-        Raylib.SetTargetFPS(60);
-        Raylib.GetFrameTime();
+        public float X;
+        public float GapY;
+        public bool Scored;
+    }
+
+    internal static class Program
+    {
+        [System.STAThread]
+        public static void Main()
+        {
+            Raylib.InitWindow(800, 800, "Flappy Bird");
+            Raylib.SetTargetFPS(60);
 
             // Bird variables
             float birdX = 200;
             float birdY = 240;
             float birdRadius = 15;
-            float birdVelocity = -3;
-            //float jumpStrength = +1;
-            //float gravity = +2;
+            float birdVelocity = 0;
+            float gravity = 0.5f;
+            float jumpStrength = -8f;
+
+            // Obstacle variables
+            float pipeWidth = 60f;
+            float gapHeight = 150f;
+            float pipeSpeed = 3f;
+            float pipeSpawnTimer = 0.0f;
+            float spawnInterval = 2.0f;
+            List<Pipe> pipes = new List<Pipe>();
 
             while (!Raylib.WindowShouldClose())
-            
-    {
-        // --- Game Logic ---
-        // 1. Check for jump input
-        if (Raylib.IsKeyPressed(KeyboardKey.Space))
-        {
-            birdVelocity = -8; // Set negative velocity to move the bird UP
-        }
+            {
+                // --- Game Logic --- //
 
-        // 2. Apply physics
-            birdVelocity += 0.5f; // Gravity pulls the bird down over time
-            birdY += birdVelocity; // Move the bird
+                // 1. Check for jump input
+                if (Raylib.IsKeyPressed(KeyboardKey.Space))
+                {
+                    birdVelocity = jumpStrength;
+                }
 
-        // --- Drawing ---
-        Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.Blue);
+                // 2. Apply physics
+                birdVelocity += gravity;
+                birdY += birdVelocity;
 
-        Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
+                // Spawn New Pipes
+                pipeSpawnTimer += Raylib.GetFrameTime();
+                if (pipeSpawnTimer >= spawnInterval)
+                {
+                    pipeSpawnTimer = 0.0f;
+                    Random rand = new Random();
+                    float randomGapY = rand.Next(200, 600);
+                    pipes.Add(new Pipe { X = 800, GapY = randomGapY, Scored = false });
+                }
 
-        Raylib.EndDrawing();
-        Raylib.CloseWindow();
-    }
-    
-}
-}
+                // Update Pipes
+                for (int i = pipes.Count - 1; i >= 0; i--)
+                {
+                    Pipe pipe = pipes[i];
+                    pipe.X -= pipeSpeed;
 
+                    // Remove pipes that go off-screen
+                    if (pipe.X < -pipeWidth)
+                    {
+                        pipes.RemoveAt(i);
+                    }
+                    else
+                    {
+                        pipes[i] = pipe; // Update struct in list
+                    }
+                }
 
+                // Collision Logic
+                Rectangle birdRect = new Rectangle(birdX - birdRadius, birdY - birdRadius, birdRadius * 2, birdRadius * 2);
 
+                foreach (Pipe pipe in pipes)
+                {
+                    float topPipeHeight = pipe.GapY - (gapHeight / 2);
+                    Rectangle topRect = new Rectangle(pipe.X, 0, pipeWidth, topPipeHeight);
 
-            /*{
-                // --- Game Logic ---
-                // Example decrement: you can adjust birdY here for gravity
-                birdY += 2; 
-                jumpStrength += 1;
-                birdVelocity += 3;
-                gravity += 2;
+                    float bottomPipeY = pipe.GapY + (gapHeight / 2);
+                    float bottomPipeHeight = 800 - bottomPipeY;
+                    Rectangle bottomRect = new Rectangle(pipe.X, bottomPipeY, pipeWidth, bottomPipeHeight);
 
-                // --- Drawing ---
+                    if (Raylib.CheckCollisionRecs(birdRect, topRect) || Raylib.CheckCollisionRecs(birdRect, bottomRect))
+                    {
+                        // Game Over / Reset
+                        birdY = 240;
+                        birdVelocity = 0;
+                        pipes.Clear();
+                        break;
+                    }
+                }
+
+                // --- Drawing --- //
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.Blue);
+                Raylib.ClearBackground(Color.RayWhite); // Clear background to prevent trailing visuals
 
-                // 2. Fixed DrawCircle syntax (integers for coordinates, valid Color call)
+                // Draw Pipes
+                foreach (Pipe pipe in pipes)
+                {
+                    float topPipeHeight = pipe.GapY - (gapHeight / 2);
+                    Rectangle topRect = new Rectangle(pipe.X, 0, pipeWidth, topPipeHeight);
+
+                    float bottomPipeY = pipe.GapY + (gapHeight / 2);
+                    float bottomPipeHeight = 800 - bottomPipeY;
+                    Rectangle bottomRect = new Rectangle(pipe.X, bottomPipeY, pipeWidth, bottomPipeHeight);
+
+                    Raylib.DrawRectangleRec(topRect, Color.Green);
+                    Raylib.DrawRectangleRec(bottomRect, Color.Green);
+                }
+
+                // Draw Bird
                 Raylib.DrawCircle((int)birdX, (int)birdY, birdRadius, Color.Yellow);
 
                 Raylib.EndDrawing();
-            } */
+            }
 
-    
-        
-    
+            Raylib.CloseWindow();
+        }
+    }
+}
