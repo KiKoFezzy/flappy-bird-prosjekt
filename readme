@@ -1,7 +1,7 @@
-// open game - terminal _ dotnet run
-// Space to jump
-// P to pause the game
-// Esc to close the game (can also tap red x top right)
+// open game - in the terminal write "dotnet run"
+// Wait for the countdown and press Spacebar to jump
+// Press P to pause the game when ever you want in a run
+// Press Esc to close the game (can also tap red x top right)
 
 
 
