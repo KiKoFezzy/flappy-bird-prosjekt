@@ -1,3 +1,10 @@
+// open game - terminal _ dotnet run
+// Space to jump
+// P to pause the game
+// Esc to close the game (can also tap red x top right)
+
+
+
 /*
 ## Plan: enkelt “Flappy Bird”-spill i C# med raylib-cs
 Martin Dustan — 12:29 PM

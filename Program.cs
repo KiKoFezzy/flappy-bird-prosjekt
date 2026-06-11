@@ -247,7 +247,7 @@ namespace flappy_bird_project
                         Color entryColor = (i == 0) ? Color.Yellow : Color.LightGray;Raylib.DrawText(scoreEntry, (800 / 2) - (entryWidth / 2), 320 + (i * 40), entrySize, entryColor);}
                         string promptText = "Press SPACE / ENTER to Restart";int promptSize = 30;int promptWidth = Raylib.MeasureText(promptText, promptSize);Raylib.DrawText(promptText, (800 / 2) - (promptWidth / 2), 700, promptSize, Color.Red);}
                         
-                        Raylib.EndDrawing();} 
+                        Raylib.EndDrawing();}      // close game press Esc //
                         Raylib.CloseWindow();}
                         // --- Helper Methods for Score Tracking --- //
                        private static List<int> LoadHighScores()
