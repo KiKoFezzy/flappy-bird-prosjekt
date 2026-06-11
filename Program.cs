@@ -67,7 +67,7 @@ namespace flappy_bird_project
                         currentState = GameState.Paused;
                     }
 
-                    // 1. Check for jump input
+                    // 1. Check for jump input (Press Spacebar to jump)
                     if (Raylib.IsKeyPressed(KeyboardKey.Space))
                     {
                         birdVelocity = jumpStrength;
@@ -101,7 +101,7 @@ namespace flappy_bird_project
                         Pipe pipe = pipes[i];
                         pipe.X -= pipeSpeed;
 
-                        // NEW: Scoring Logic
+                        // Scoring Logic
                         if (!pipe.Scored && pipe.X + pipeWidth < birdX)
                         {
                             score++;
@@ -270,10 +270,9 @@ namespace flappy_bird_project
 private static List<int> AddScore(List<int> scores, int newScore)
 {
     scores.Add(newScore);
-    // Fixed: 'compareTo' is case-sensitive and should be 'CompareTo'
     scores.Sort((a, b) => b.CompareTo(a)); 
     
-    // Fixed/Optimized: If we have more than 10 scores, truncate cleanly
+    // If we have more than 10 scores, truncate cleanly
     if (scores.Count > 10)
     {
         scores = scores.Take(10).ToList();
